@@ -9,8 +9,24 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
+const baseConfig = [...compat.extends("next/core-web-vitals", "next/typescript")];
+
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+  {
+    ignores: [".next/**/*"],
+  },
+  ...baseConfig,
+  {
+    rules: {
+      "react/jsx-curly-brace-presence": [
+        "error",
+        {
+          props: "always",
+          children: "always",
+        },
+      ],
+    },
+  },
 ];
 
 export default eslintConfig;
