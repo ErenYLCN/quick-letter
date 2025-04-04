@@ -1,6 +1,6 @@
-import { ForwardedRef, HTMLProps } from "react";
+import { ForwardedRef, TextareaHTMLAttributes } from "react";
 
-interface TextareaProps extends HTMLProps<HTMLTextAreaElement> {
+interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   ref?: ForwardedRef<HTMLTextAreaElement>;
 }
 

@@ -1,15 +1,20 @@
-import { ReactNode } from "react";
-import { ForwardedRef } from "react";
+import { ButtonHTMLAttributes, ReactNode, RefObject } from "react";
 
-interface ButtonProps {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
-  ref?: ForwardedRef<HTMLButtonElement>;
+  ref?: RefObject<HTMLButtonElement>;
 }
 
-function Button({ children, ref }: ButtonProps) {
-  console.log(ref);
+function Button({ children, ref, ...rest }: ButtonProps) {
+  return (
+    <button ref={ref} onClick={handleClick} {...rest}>
+      {children}
+    </button>
+  );
 
-  return <button ref={ref}>{children}</button>;
+  function handleClick() {
+    console.log("button clicked");
+  }
 }
 
 export default Button;
