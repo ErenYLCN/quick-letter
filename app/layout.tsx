@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono as GeistMono } from "next/font/google";
 import "./styles/_globals.css";
 import "./styles/override/_button.css";
+import "./styles/override/_textarea.css";
 import React from "react";
 
 const geistSans = Geist({

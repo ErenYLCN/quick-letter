@@ -1,20 +1,16 @@
-import { ButtonHTMLAttributes, ReactNode, RefObject } from "react";
+import classNames from "classnames";
+import { ButtonHTMLAttributes, RefObject } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: ReactNode;
   ref?: RefObject<HTMLButtonElement>;
 }
 
-function Button({ children, ref, ...rest }: ButtonProps) {
+function Button({ children, ref, className, ...rest }: ButtonProps) {
   return (
-    <button ref={ref} onClick={handleClick} {...rest}>
+    <button className={classNames(className, "p-2 border-amber-300 border-2")} ref={ref} {...rest}>
       {children}
     </button>
   );
-
-  function handleClick() {
-    console.log("button clicked");
-  }
 }
 
 export default Button;

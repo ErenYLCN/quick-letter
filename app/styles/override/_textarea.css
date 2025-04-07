@@ -1,0 +1,7 @@
+textarea {
+  display: block;
+  resize: both;
+  min-width: 200px;
+
+  border: 1px solid red;
+}
