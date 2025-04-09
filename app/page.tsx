@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import Button from "./components/button/Button";
 import Textarea from "./components/textarea/Textarea";
 import Form from "next/form";
+import Card from "./components/card/Card";
 
 export default async function Home() {
   const cookie = await cookies();
@@ -29,7 +30,9 @@ export default async function Home() {
 
       <ul>
         {parsedParagraphs.map((p, i) => (
-          <li key={i}>{p}</li>
+          <li key={i}>
+            <Card>{p}</Card>
+          </li>
         ))}
       </ul>
     </div>
