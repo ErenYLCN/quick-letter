@@ -28,7 +28,7 @@ export default async function Home() {
         </div>
       </Form>
 
-      <ul>
+      <ul className={"max-w-2xl"}>
         {parsedParagraphs.map((p, i) => (
           <li key={i}>
             <Card>{p}</Card>
