@@ -17,6 +17,15 @@ export default async function Home() {
     cookie.set("paragraphs", JSON.stringify([...JSON.parse((cookie.get("paragraphs")?.value || "[]") as string), paragraph]));
   };
 
+  const handleDelete = async (index: number) => {
+    "use server";
+    const cookie = await cookies();
+    const paragraphs = cookie.get("paragraphs");
+    const parsedParagraphs: string[] = paragraphs ? JSON.parse(paragraphs.value) : [];
+    parsedParagraphs.splice(index, 1);
+    cookie.set("paragraphs", JSON.stringify(parsedParagraphs));
+  };
+
   return (
     <div>
       <Form action={paragraphFormAction}>
@@ -31,7 +40,8 @@ export default async function Home() {
       <ul className={"max-w-2xl"}>
         {parsedParagraphs.map((p, i) => (
           <li key={i}>
-            <Card>{p}</Card>
+            {/* // TODO: work more on understanding optimal architecture */}
+            <Card actions={[{ label: "TRASH", handler: () => handleDelete(i) }]}>{p}</Card>
           </li>
         ))}
       </ul>
