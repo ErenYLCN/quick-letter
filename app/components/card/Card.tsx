@@ -6,7 +6,7 @@ interface CardProps {
   children: ReactNode;
   className?: string;
   actions?: {
-    label: string;
+    label: React.ReactNode;
     handler: () => void;
   }[];
 }

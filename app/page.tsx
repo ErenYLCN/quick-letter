@@ -3,6 +3,7 @@ import Button from "./components/button/Button";
 import Textarea from "./components/textarea/Textarea";
 import Form from "next/form";
 import Card from "./components/card/Card";
+import { Trash } from "lucide-react";
 
 export default async function Home() {
   const cookie = await cookies();
@@ -15,15 +16,6 @@ export default async function Home() {
     const paragraph = formData.get("paragraph");
 
     cookie.set("paragraphs", JSON.stringify([...JSON.parse((cookie.get("paragraphs")?.value || "[]") as string), paragraph]));
-  };
-
-  const handleDelete = async (index: number) => {
-    "use server";
-    const cookie = await cookies();
-    const paragraphs = cookie.get("paragraphs");
-    const parsedParagraphs: string[] = paragraphs ? JSON.parse(paragraphs.value) : [];
-    parsedParagraphs.splice(index, 1);
-    cookie.set("paragraphs", JSON.stringify(parsedParagraphs));
   };
 
   return (
@@ -41,7 +33,23 @@ export default async function Home() {
         {parsedParagraphs.map((p, i) => (
           <li key={i}>
             {/* // TODO: work more on understanding optimal architecture */}
-            <Card actions={[{ label: "TRASH", handler: () => handleDelete(i) }]}>{p}</Card>
+            <Card
+              actions={[
+                {
+                  label: <Trash size={16} />,
+                  handler: async () => {
+                    "use server";
+                    const cookie = await cookies();
+                    const paragraphs = cookie.get("paragraphs");
+                    const parsedParagraphs: string[] = paragraphs ? JSON.parse(paragraphs.value) : [];
+                    parsedParagraphs.splice(i, 1);
+                    cookie.set("paragraphs", JSON.stringify(parsedParagraphs));
+                  },
+                },
+              ]}
+            >
+              {p}
+            </Card>
           </li>
         ))}
       </ul>
