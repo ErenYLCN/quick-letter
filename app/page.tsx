@@ -19,40 +19,52 @@ export default async function Home() {
   };
 
   return (
-    <div>
-      <Form action={paragraphFormAction}>
-        <div>
-          <Textarea name={"paragraph"} className={"w-full max-w-4/5"} placeholder={"write something..."} />
-        </div>
-        <div>
-          <Button type={"submit"}>{"Saave Paragraph"}</Button>
-        </div>
-      </Form>
+    <main className={"flex"}>
+      <div className={"border-r-2 border-gray-200 p-8 h-full min-w-md"}>
+        <div className={"flex flex-col h-full"}>
+          <div className={"flex-grow"}>
+            <Form action={paragraphFormAction}>
+              <div>
+                <Textarea name={"paragraph"} className={"w-full min-h-24 min-w-[382px]"} placeholder={"write something..."} />
+              </div>
+              <div className={"text-right"}>
+                <Button type={"submit"} className={"mt-2"}>
+                  {"Save Paragraph"}
+                </Button>
+              </div>
+            </Form>
 
-      <ul className={"max-w-2xl"}>
-        {parsedParagraphs.map((p, i) => (
-          <li key={i}>
-            {/* // TODO: work more on understanding optimal architecture */}
-            <Card
-              actions={[
-                {
-                  label: <Trash size={16} />,
-                  handler: async () => {
-                    "use server";
-                    const cookie = await cookies();
-                    const paragraphs = cookie.get("paragraphs");
-                    const parsedParagraphs: string[] = paragraphs ? JSON.parse(paragraphs.value) : [];
-                    parsedParagraphs.splice(i, 1);
-                    cookie.set("paragraphs", JSON.stringify(parsedParagraphs));
-                  },
-                },
-              ]}
-            >
-              {p}
-            </Card>
-          </li>
-        ))}
-      </ul>
-    </div>
+            <h1 className={"text-2xl font-bold mb-4"}>{"My Paragraphs"}</h1>
+
+            <ul className={"max-w-2xl"}>
+              {parsedParagraphs.map((p, i) => (
+                <li key={i} className={"mb-4"}>
+                  {/* // TODO: work more on understanding optimal architecture */}
+                  <Card
+                    actions={[
+                      {
+                        label: <Trash size={16} />,
+                        handler: async () => {
+                          "use server";
+                          const cookie = await cookies();
+                          const paragraphs = cookie.get("paragraphs");
+                          const parsedParagraphs: string[] = paragraphs ? JSON.parse(paragraphs.value) : [];
+                          parsedParagraphs.splice(i, 1);
+                          cookie.set("paragraphs", JSON.stringify(parsedParagraphs));
+                        },
+                      },
+                    ]}
+                  >
+                    {p}
+                  </Card>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div className={"grow p-12"}>{"Assembly"}</div>
+      <aside className={"border-l-2 border-gray-200 pl-8 pr-4 h-full w-64"}>{"Options"}</aside>
+    </main>
   );
 }
