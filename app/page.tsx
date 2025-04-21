@@ -4,6 +4,7 @@ import Textarea from "./components/textarea/Textarea";
 import Form from "next/form";
 import Card from "./components/card/Card";
 import { Trash } from "lucide-react";
+import ExportButton from "./components/export-button/ExportButton";
 
 export default async function Home() {
   const cookie = await cookies();
@@ -64,7 +65,11 @@ export default async function Home() {
         </div>
       </div>
       <div className={"grow p-12"}>{"Assembly"}</div>
-      <aside className={"border-l-2 border-gray-200 pl-8 pr-4 h-full w-64"}>{"Options"}</aside>
+      <aside className={"border-l-2 border-gray-200 pl-8 pr-4 h-full w-64"}>
+        <h2>{"Options"}</h2>
+
+        <ExportButton />
+      </aside>
     </main>
   );
 }
