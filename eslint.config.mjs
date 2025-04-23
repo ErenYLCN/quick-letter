@@ -25,6 +25,7 @@ const eslintConfig = [
           children: "always",
         },
       ],
+      "no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
     },
   },
 ];
