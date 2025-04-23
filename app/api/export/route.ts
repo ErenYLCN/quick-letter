@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
 import PDFDocument from "pdfkit";
+import fs from "fs";
 
-export async function POST(request: Request) {
+export async function POST(_request: Request) {
   try {
-    console.log(request);
+    console.log(fs);
 
     const doc = new PDFDocument();
 
